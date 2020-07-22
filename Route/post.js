@@ -21,7 +21,7 @@ route.get("/", async (req, res) => {
     try {
             const posts = await Member.find();
             res.json(posts);
-            res.end();
+          
 
     }
     catch (err) {
@@ -49,20 +49,17 @@ route.get("/member",async(req,res)=>{
         let memName = req.query.name;
         let found = await Member.find({ Name:memName , Team: team }).exec();
         res.json(found);
-        res.end();
         }
      if(req.query.team!=undefined){
         let team = req.query.team;
         let found = await Member.find({ Team: team }).exec();
         res.json(found);
-        res.end();
 
     }
      if (req.query.name != undefined) {
         let memName = req.query.name;
         let found = await Member.findOne({ Name: memName }).exec();
         res.json(found);
-        res.end();
 
     }
  }
