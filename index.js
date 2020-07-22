@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     res.send("SNH48 Page");
 })
 app.use('/api/snh48/',Post);
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8080));
 app.listen(app.get('port'), () => {
     console.log(`Server is listening on port ${process.env.PORT}`);
 })
