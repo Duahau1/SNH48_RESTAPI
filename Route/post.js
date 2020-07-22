@@ -20,7 +20,7 @@ cloudinary.config({
 route.get("/", async (req, res) => {
     try {
             const posts = await Member.find();
-           return res.json(posts);
+            res.json(posts);
           
 
     }
