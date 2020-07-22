@@ -19,10 +19,8 @@ cloudinary.config({
 //Get all the members of SNH48
 route.get("/", async (req, res) => {
     try {
-            const posts = await Member.find();
+            const posts = await Member.find().exec();
             res.json(posts);
-          
-
     }
     catch (err) {
         res.json({ Error: "Not Found" });

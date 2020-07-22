@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Rest API for SNH48",
   "main": "index.js",
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "index.js"
@@ -17,7 +16,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.4",
-    "mongoose": "^5.9.25"
+    "mongoose": "^5.9.25",
+    "node-cron": "^2.0.3"
   },
   "devDependencies": {}
 }
