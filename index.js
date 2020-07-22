@@ -22,6 +22,6 @@ app.get('/', (req, res) => {
 })
 app.use('/api/snh48/',Post);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is listening on port ${process.env.PORT}`);
 })
