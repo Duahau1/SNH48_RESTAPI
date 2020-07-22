@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Post = require('./Route/post');
+const Post = require(__dirname +'/Route/post');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
