@@ -21,6 +21,8 @@ route.get("/", async (req, res) => {
     try {
             const posts = await Member.find();
             res.json(posts);
+            res.end();
+
     }
     catch (err) {
         res.json({ Error: "Not Found" });
@@ -47,20 +49,25 @@ route.get("/member",async(req,res)=>{
         let memName = req.query.name;
         let found = await Member.find({ Name:memName , Team: team }).exec();
         res.json(found);
+        res.end();
         }
      if(req.query.team!=undefined){
         let team = req.query.team;
         let found = await Member.find({ Team: team }).exec();
         res.json(found);
+        res.end();
+
     }
      if (req.query.name != undefined) {
         let memName = req.query.name;
         let found = await Member.findOne({ Name: memName }).exec();
         res.json(found);
+        res.end();
+
     }
  }
     catch(err){
-        res.status(404).json()
+        res.status(404).json();
     }
 })
 
@@ -75,6 +82,7 @@ route.post("/", async (req, res) => {
                     rej("Invalid Format");
                 }
                 resp(result);
+
             })
         }
         else {
