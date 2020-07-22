@@ -22,6 +22,6 @@ app.get('/', (req, res) => {
 })
 app.use('/api/snh48/',Post);
 
-app.listen(3000, "localhost", () => {
+app.listen(process.env.PORT, () => {
     console.log("Server is listening on port 3000");
 })
