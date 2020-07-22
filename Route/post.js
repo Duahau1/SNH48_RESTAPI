@@ -20,10 +20,10 @@ cloudinary.config({
 route.get("/", async (req, res) => {
     try {
             const posts = await Member.find();
-            res.status(200).send(posts);
+            res.json(posts);
     }
     catch (err) {
-        res.status(404).json({ Error: "Not Found" });
+        res.json({ Error: "Not Found" });
     }
 });
 
@@ -32,10 +32,10 @@ route.get("/member/:id", async(req,res)=>{
     try{
         let mem_id= escape(req.params.id); 
         let found = await Member.findById(mem_id).exec();
-        res.status(200).json(found);
+        res.json(found);
     }
     catch(err){
-        res.status(404).json({Error: "Not Found"});
+        res.json({Error: "Not Found"});
     }
 })
 
@@ -46,17 +46,17 @@ route.get("/member",async(req,res)=>{
         let team = req.query.team;
         let memName = req.query.name;
         let found = await Member.find({ Name:memName , Team: team }).exec();
-        res.status(200).json(found);
+        res.json(found);
         }
      if(req.query.team!=undefined){
         let team = req.query.team;
         let found = await Member.find({ Team: team }).exec();
-        res.status(200).json(found);
+        res.json(found);
     }
      if (req.query.name != undefined) {
         let memName = req.query.name;
         let found = await Member.findOne({ Name: memName }).exec();
-        res.status(200).json(found);
+        res.json(found);
     }
  }
     catch(err){
