@@ -20,7 +20,7 @@ cloudinary.config({
 route.get("/", async (req, res) => {
     try {
             const posts = await Member.find();
-            res.status(200).json(posts);
+            res.status(200).send(posts);
     }
     catch (err) {
         res.status(404).json({ Error: "Not Found" });
