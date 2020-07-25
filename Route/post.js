@@ -6,7 +6,7 @@ const upload = require('express-fileupload');
 const mongoSanitize = require('mongo-sanitize');
 const check_Auth = require('./checkAuth');
 const check_Admin = require('./checkAdmin');
-
+const memcache = require('./Cache');
 route.use(upload({
     useTempFiles: true,
     limits: { fileSize: 50 * 1024 * 1024 }
@@ -20,10 +20,11 @@ cloudinary.config({
 })
 
 //Get all the members of SNH48
-route.get("/", async (req, res) => {
+route.get("/",memcache(30) ,async (req, res) => {
     try {
             const posts = await Member.find().exec();
             res.json(posts);
+
     }
     catch (err) {
         res.json({ Error: "Not Found" });
@@ -31,7 +32,7 @@ route.get("/", async (req, res) => {
 });
 
 //Get by ID
-route.get("/member/:id", async(req,res)=>{
+route.get("/member/:id",memcache(30) ,async(req,res)=>{
     try{
         let mem_id= mongoSanitize(req.params.id); 
         let found = await Member.findById(mem_id).exec();
@@ -43,7 +44,7 @@ route.get("/member/:id", async(req,res)=>{
 })
 
 //Get by team and name and only dedicated for logged in user
-route.get("/member",check_Auth, async(req,res)=>{
+route.get("/member",check_Auth,memcache(30), async(req,res)=>{
    try {
         if(req.query.team!=undefined && req.query.name != undefined){
         let team = mongoSanitize(req.query.team);
@@ -65,13 +66,19 @@ route.get("/member",check_Auth, async(req,res)=>{
     }
  }
     catch(err){
-        res.status(404).json();
+        res.status(404).json(err);
     }
 })
 
 //Posting to the DB admin method
 route.post("/",check_Admin ,async (req, res) => {
-    let file = req.files.Image;
+    let file ='';
+    try{
+    file = req.files.Image;
+    }
+    catch(err){
+        res.json({Message:"Please input photo"});
+    }
     let photo = await new Promise((resp, rej) => {
         if (file.mimetype === 'image/jpeg' || file.mimetype == 'image/png') {
             cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
