@@ -1,6 +1,6 @@
 {
   "name": "snh48_api",
-  "version": "1.2.1",
+  "version": "1.1.1",
   "description": "Rest API for SNH48",
   "main": "index.js",
   "scripts": {

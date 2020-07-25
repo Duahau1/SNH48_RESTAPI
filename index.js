@@ -53,7 +53,7 @@ cron.schedule('0 0 1 */6 *', async() => {
 });
 
 // App listening on assigned port 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 8080));
 app.listen(app.get('port'), () => {
     console.log(`Server is listening on port ${process.env.PORT}`);
 })
