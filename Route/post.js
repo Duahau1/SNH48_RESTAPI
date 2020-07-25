@@ -3,8 +3,11 @@ const route = express.Router();
 const Member = require('../Models/Member');
 const cloudinary = require('cloudinary').v2;
 const upload = require('express-fileupload');
-var fs = require('fs');
- route.use(upload({
+const mongoSanitize = require('mongo-sanitize');
+const check_Auth = require('./checkAuth');
+const check_Admin = require('./checkAdmin');
+
+route.use(upload({
     useTempFiles: true,
     limits: { fileSize: 50 * 1024 * 1024 }
 }));
@@ -30,7 +33,7 @@ route.get("/", async (req, res) => {
 //Get by ID
 route.get("/member/:id", async(req,res)=>{
     try{
-        let mem_id= escape(req.params.id); 
+        let mem_id= mongoSanitize(req.params.id); 
         let found = await Member.findById(mem_id).exec();
         res.json(found);
     }
@@ -39,23 +42,23 @@ route.get("/member/:id", async(req,res)=>{
     }
 })
 
-//Get by team and name 
-route.get("/member",async(req,res)=>{
+//Get by team and name and only dedicated for logged in user
+route.get("/member",check_Auth, async(req,res)=>{
    try {
         if(req.query.team!=undefined && req.query.name != undefined){
-        let team = req.query.team;
-        let memName = req.query.name;
+        let team = mongoSanitize(req.query.team);
+        let memName = mongoSanitize(req.query.name);
         let found = await Member.find({ Name:memName , Team: team }).exec();
         res.json(found);
         }
      if(req.query.team!=undefined){
-        let team = req.query.team;
+        let team = mongoSanitize(req.query.team);
         let found = await Member.find({ Team: team }).exec();
         res.json(found);
 
     }
      if (req.query.name != undefined) {
-        let memName = req.query.name;
+        let memName = mongoSanitize(req.query.name);
         let found = await Member.findOne({ Name: memName }).exec();
         res.json(found);
 
@@ -66,8 +69,8 @@ route.get("/member",async(req,res)=>{
     }
 })
 
-//Posting to the DB
-route.post("/", async (req, res) => {
+//Posting to the DB admin method
+route.post("/",check_Admin ,async (req, res) => {
     let file = req.files.Image;
     let photo = await new Promise((resp, rej) => {
         if (file.mimetype === 'image/jpeg' || file.mimetype == 'image/png') {
