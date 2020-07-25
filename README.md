@@ -1,5 +1,5 @@
 <h1>SNH48 REST API</h1>
-<img src="./19344-5jig442kjs.jpg" alt ="This is SNH48 logo" height="100px" />
+<img src="./19344-5jig442kjs.jpg" alt ="This is SNH48 logo" height="150px" />
 <h2>Documentation</h2>
 The documentation for SNH48 Rest API can be found <a href="https://app.swaggerhub.com/apis-docs/Duahau1/SNH48TEAM/1.1.1"> here </a> 
 
