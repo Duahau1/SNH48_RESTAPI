@@ -11,7 +11,7 @@ The documentation for SNH48 Rest API can be found <a href="https://app.swaggerhu
   
   - The API gives you the options to view all current team members of SNH48 or each team. It also allows you to get each individuals information.
   
-  - The API is created as part of celebration of SSK7 and SNH48's Gen 1's graduation.
+  - The API is created as part of celebration for incoming SSK7 and SNH48's Gen 1's graduation.
 * Version 1.1.1
 
   - The API requires you to sign in if you want to view individual team member or members of certain team.
