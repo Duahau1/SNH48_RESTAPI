@@ -26,6 +26,10 @@ The documentation for SNH48 Rest API can be found <a href="https://app.swaggerhu
   - Added memory cache to speed up GET request(speed up by 89% comparing to without cache - the result is calculted with 10 samples and Postman).
   - Added members of GNZ48 (team G, team NIII, and team Z).
   - Fixed HTTP_HEADERS error.
-  
+  - Added unit tests with Mocha and Chai.
+  - Added members of BEJ48(Team B, Team E, Team J).
+
+
+
   
 
