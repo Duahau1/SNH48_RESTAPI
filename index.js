@@ -29,6 +29,8 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('connected', () => {
     console.log('Database Set Up Successfully');
+    app.emit("appStarted");
+
 });
 mongoose.connection.on('error', function (err) {
     console.log('Database Connection Error: ' + err);
@@ -52,8 +54,9 @@ cron.schedule('0 0 1 */6 *', async() => {
     }
 });
 
-// App listening on assigned port 
-app.set('port', (process.env.PORT || 8080));
-app.listen(app.get('port'), () => {
+// App listening on assigned port  8080
+app.set('port', (process.env.PORT || 3000));
+ app.listen(app.get('port'), () => {
     console.log(`Server is listening on port ${process.env.PORT}`);
 })
+module.exports = app;

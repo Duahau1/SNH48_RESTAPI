@@ -4,7 +4,7 @@
   "description": "Rest API for SNH48",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --exit",
     "start": "index.js"
   },
   "author": "v Nguyen",
@@ -23,5 +23,9 @@
     "mongoose": "^5.9.25",
     "node-cron": "^2.0.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.1.1"
+  }
 }

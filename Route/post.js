@@ -36,32 +36,56 @@ route.get("/member/:id",memcache(30) ,async(req,res)=>{
     try{
         let mem_id= mongoSanitize(req.params.id); 
         let found = await Member.findById(mem_id).exec();
+        if(found!=null){
         res.json(found);
+        }
+        else{
+            throw new Error("No matching");
+        }
     }
     catch(err){
-        res.json({Error: "Not Found"});
+        res.status(404).json({Error: "Not Found"});
     }
 })
 
 //Get by team and name and only dedicated for logged in user
 route.get("/member",check_Auth,memcache(30), async(req,res)=>{
    try {
-        if(req.query.team!=undefined && req.query.name != undefined){
+        if(req.query.name==null&& req.query.team==null){
+            throw new Error("No matching member");
+        }
+        else if(req.query.team!=undefined && req.query.name != undefined){
         let team = mongoSanitize(req.query.team);
         let memName = mongoSanitize(req.query.name);
         let found = await Member.find({ Name:memName , Team: team }).exec();
+        if(found.length >0){
         res.json(found);
         }
-     if(req.query.team!=undefined){
+        else{
+            throw new Error("No matching member");
+        }
+
+        }
+     else if(req.query.team!=undefined){
         let team = mongoSanitize(req.query.team);
         let found = await Member.find({ Team: team }).exec();
-        res.json(found);
+        if(found.length>0){
+            res.json(found);
+            }
+            else{
+                throw new Error("No matching member");
+            }
 
     }
-     if (req.query.name != undefined) {
+     else if (req.query.name != undefined) {
         let memName = mongoSanitize(req.query.name);
         let found = await Member.findOne({ Name: memName }).exec();
-        res.json(found);
+        if(found!=null){
+            res.json(found);
+            }
+            else{
+                throw new Error("No matching member");
+       }
 
     }
  }
