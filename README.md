@@ -29,7 +29,7 @@ The documentation for SNH48 Rest API can be found <a href="https://app.swaggerhu
   - Added unit tests with Mocha and Chai.
   - Added members of BEJ48(Team B, Team E, Team J).
 
-<img src="./mochatest.PNG" alt ="mocha&chai test results" "height=60%"/>
+<img src="./mochatest.PNG" alt ="mocha&chai test results" "height=350px"/>
 
 
   
