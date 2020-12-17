@@ -20,7 +20,6 @@ The documentation for SNH48 Rest API can be found <a href="https://app.swaggerhu
   
   - Added admin permission for POST/PATCH request with the member's database.
   
-  - Update member's age every 6 months.
 * Version 1.1.2
 
   - Added memory cache to speed up GET request(speed up by 89% comparing to without cache - the result is calculted with 10 samples and Postman).
